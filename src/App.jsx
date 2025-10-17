@@ -1,3 +1,4 @@
+// FILE: src/App.jsx
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import { Sidebar, MusicPlayer, TopPlay } from './components';
@@ -5,7 +6,13 @@ import { TopArtists, Discover, SongDetails, TopCharts } from './pages';
 import PlaylistModal from "./components/PlaylistModal.jsx";
 import { useGetDiscoverSongsQuery } from "./redux/services/shazamCore";
 import PlaylistPage from './pages/PlaylistPage';
-import Footer from './components/Footer';
+
+// ✅ Footer component
+const Footer = () => (
+  <footer className="w-full text-center py-4 text-gray-400 bg-black">
+    &copy; {new Date().getFullYear()} Md Ashfaqur Rahman Khan. All rights reserved.
+  </footer>
+);
 
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
@@ -14,12 +21,12 @@ const App = () => {
   const discoverSongs = discoverData?.data || [];
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="flex flex-1 relative">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-black to-[#121286] text-white">
+      <div className="relative flex flex-1">
         <Sidebar />
 
-        <div className="flex-1 flex flex-col bg-gradient-to-br from-black to-[#121286]">
-          <div className="px-6 flex-1 overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
+        <div className="flex-1 flex flex-col">
+          <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
             <div className="flex-1 h-fit pb-40">
               <Routes>
                 <Route path="/" element={<Discover />} />
@@ -37,20 +44,17 @@ const App = () => {
         </div>
       </div>
 
-      {/* ✅ Always mounted modal */}
+      {/* ✅ Always mounted modal (listens for openCreateModal in Redux) */}
       <PlaylistModal discoverSongs={discoverSongs} />
 
-      {/* Music Player inside a wrapper so it pushes footer down */}
       {activeSong?.title && (
-        <div className="relative z-10">
+        <div className="w-full h-28 z-20 pb-28 bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl">
           <MusicPlayer />
         </div>
       )}
-
       <Footer />
     </div>
   );
 };
 
 export default App;
-
