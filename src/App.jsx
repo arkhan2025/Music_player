@@ -48,7 +48,7 @@ const App = () => {
       <PlaylistModal discoverSongs={discoverSongs} />
 
       {activeSong?.title && (
-        <div className="h-20 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10 mt-4">
+        <div className="h-20 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
           <MusicPlayer />
         </div>
       )}
