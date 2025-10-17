@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const shazamCoreApi = createApi({
   reducerPath: "shazamCoreApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
+  baseQuery: fetchBaseQuery({ baseUrl: "https://music-player-zzfk.onrender.com/api" }),
   endpoints: (builder) => ({
     // Discover Songs — supports search + genre
     getDiscoverSongs: builder.query({
