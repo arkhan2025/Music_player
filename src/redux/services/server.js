@@ -5,6 +5,9 @@ import cors from "cors";
 const app = express();
 app.use(cors());
 
+// Use dynamic port for deployment platforms
+const PORT = process.env.PORT || 5000;
+
 // 🔹 Top charts (50 tracks)
 app.get("/api/charts", async (req, res) => {
   try {
@@ -140,4 +143,4 @@ app.get("/api/lyrics", async (req, res) => {
 });
 
 // Start server
-app.listen(5000, () => console.log("✅ Server running on port 5000"));
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
