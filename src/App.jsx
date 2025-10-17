@@ -7,6 +7,13 @@ import PlaylistModal from "./components/PlaylistModal.jsx";
 import { useGetDiscoverSongsQuery } from "./redux/services/shazamCore";
 import PlaylistPage from './pages/PlaylistPage';
 
+// ✅ Footer component
+const Footer = () => (
+  <footer className="w-full text-center py-4 text-gray-400 bg-black">
+    &copy; {new Date().getFullYear()} Md Ashfaqur Rahman Khan. All rights reserved.
+  </footer>
+);
+
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
 
@@ -14,23 +21,25 @@ const App = () => {
   const discoverSongs = discoverData?.data || [];
 
   return (
-    <div className="relative flex">
-      <Sidebar />
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-black to-[#121286] text-white">
+      <div className="relative flex flex-1">
+        <Sidebar />
 
-      <div className="flex-1 flex flex-col bg-gradient-to-br from-black to-[#121286]">
-        <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
-          <div className="flex-1 h-fit pb-40">
-            <Routes>
-              <Route path="/" element={<Discover />} />
-              <Route path="/top-artists" element={<TopArtists />} />
-              <Route path="/top-charts" element={<TopCharts />} />
-              <Route path="/songs/:songId" element={<SongDetails />} />
-              <Route path="/playlist/:id" element={<PlaylistPage discoverSongs={discoverSongs} />} />
-            </Routes>
-          </div>
+        <div className="flex-1 flex flex-col">
+          <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
+            <div className="flex-1 h-fit pb-40">
+              <Routes>
+                <Route path="/" element={<Discover />} />
+                <Route path="/top-artists" element={<TopArtists />} />
+                <Route path="/top-charts" element={<TopCharts />} />
+                <Route path="/songs/:songId" element={<SongDetails />} />
+                <Route path="/playlist/:id" element={<PlaylistPage discoverSongs={discoverSongs} />} />
+              </Routes>
+            </div>
 
-          <div className="xl:sticky relative top-0 h-fit">
-            <TopPlay />
+            <div className="xl:sticky relative top-0 h-fit">
+              <TopPlay />
+            </div>
           </div>
         </div>
       </div>
@@ -43,6 +52,9 @@ const App = () => {
           <MusicPlayer />
         </div>
       )}
+
+      {/* ✅ Footer */}
+      <Footer />
     </div>
   );
 };
