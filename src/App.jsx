@@ -42,7 +42,7 @@ const App = () => {
 
       {/* Music Player inside a wrapper so it pushes footer down */}
       {activeSong?.title && (
-        <div className="relative left-0 right-0 h-28 z-50 bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl">
+        <div className="relative z-10">
           <MusicPlayer />
         </div>
       )}
