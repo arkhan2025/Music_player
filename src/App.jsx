@@ -16,20 +16,18 @@ const Footer = () => (
 
 const App = () => {
   const { activeSong } = useSelector((state) => state.player);
-
   const { data: discoverData } = useGetDiscoverSongsQuery({ searchTerm: "", genre: "pop" });
   const discoverSongs = discoverData?.data || [];
 
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-black to-[#121286] text-white">
-      
-      {/* Main content + sidebar */}
-      <div className="flex flex-1 relative">
+      <div className="relative flex flex-1">
         <Sidebar />
 
         <div className="flex-1 flex flex-col">
-          <div className="px-6 h-[calc(100vh-72px)] overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
-            <div className="flex-1 h-fit pb-40">
+          {/* Main scrollable content */}
+          <div className="flex-1 px-6 overflow-y-scroll hide-scrollbar flex xl:flex-row flex-col-reverse">
+            <div className="flex-1 h-fit pb-28"> {/* Reserve player height */}
               <Routes>
                 <Route path="/" element={<Discover />} />
                 <Route path="/top-artists" element={<TopArtists />} />
@@ -46,12 +44,12 @@ const App = () => {
         </div>
       </div>
 
-      {/* Playlist modal always mounted */}
+      {/* Always mounted modal */}
       <PlaylistModal discoverSongs={discoverSongs} />
 
-      {/* Music player positioned just above footer */}
+      {/* Player */}
       {activeSong?.title && (
-        <div className="flex-shrink-0 h-28 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
+        <div className="h-28 flex animate-slideup bg-gradient-to-br from-white/10 to-[#2a2a80] backdrop-blur-lg rounded-t-3xl z-10">
           <MusicPlayer />
         </div>
       )}
